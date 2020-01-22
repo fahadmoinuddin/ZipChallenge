@@ -6,7 +6,7 @@ An android app to display a list of stocks and their real time prices. The user 
 
 ### Light Mode
 
-![](screenshots/1.png)   ![](screenshots/2.png)   ![](screenshots/3.png)   ![](screenshots/4.png)
+![](screenshots/1.jpg)   ![](screenshots/2.png)   ![](screenshots/3.png)   ![](screenshots/4.png)
 
 ### Dark Mode
 
