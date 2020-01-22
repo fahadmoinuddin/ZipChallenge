@@ -2,16 +2,6 @@
 
 An android app to display a list of stocks and their real time prices. The user can add stocks as favourite and their prices get refreshed every 15 seconds. The app supports Dark Theme and the options to enable/disable is available in Settings. There is also an added feature to view how a company's stock has been performing in the last 3 months, last 6 months, last 1 year, last 3 years.
 
-## Screenshots
-
-### Light Mode
-
-![](screenshots/1.jpg)   ![](screenshots/2.png)   ![](screenshots/3.png)   ![](screenshots/4.png)
-
-### Dark Mode
-
-![](screenshots/5.png)   ![](screenshots/6.png)   ![](screenshots/7.png)   ![](screenshots/8.png)
-
 ## Architecture
 
 ### Design Pattern
@@ -64,3 +54,13 @@ The following architecture components have been used in the app:
 
 * This app will run on devices with minimum SDK version \>= 23
 * The default theme of the app is Light mode
+
+## Screenshots
+
+### Light Mode
+
+![](screenshots/1.jpg)   ![](screenshots/2.png)   ![](screenshots/3.png)   ![](screenshots/4.png)
+
+### Dark Mode
+
+![](screenshots/5.png)   ![](screenshots/6.png)   ![](screenshots/7.png)   ![](screenshots/8.png)
