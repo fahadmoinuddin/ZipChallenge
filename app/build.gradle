@@ -1,0 +1,150 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+
+android {
+    compileSdkVersion rootProject.compileSDK_version
+
+    defaultConfig {
+        applicationId "com.zip.challenge"
+        minSdkVersion rootProject.minSDK_version
+        targetSdkVersion rootProject.targetSDK_version
+        if (!isReleaseBuild()) {
+            def versionStamp = getVersionCodeTimestamp()
+            versionCode 1
+            versionName "1.0.$versionStamp"
+        } else {
+            versionCode 1
+            versionName "1.0"
+        }
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file('zipchallenge.debug.keystore')
+            storePassword "$keyPwd"
+            keyAlias "$keyAliasName"
+            keyPassword "$keyPwd"
+        }
+
+        release {
+            storeFile file('zipchallenge.jks')
+            storePassword "$keyPwd"
+            keyAlias "$keyAliasName"
+            keyPassword "$keyPwd"
+        }
+    }
+
+    buildTypes {
+        debug {
+            shrinkResources false
+            minifyEnabled false
+
+            applicationIdSuffix ".dev"
+            signingConfig signingConfigs.debug
+
+            resValue "string", "app_name", "Zip Challenge Dev"
+        }
+        release {
+            shrinkResources false
+            minifyEnabled false
+
+            signingConfig signingConfigs.release
+
+            resValue "string", "app_name", "Zip Challenge"
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled true
+    }
+
+    packagingOptions {
+        exclude 'META-INF/atomicfu.kotlin_module'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+}
+
+def isReleaseBuild() {
+    try {
+        return gradle.startParameter.taskNames.collect { item ->
+            item.toLowerCase().contains('release')
+        }.contains(true)
+    } catch(Exception ex) {
+        println ex
+        return false
+    }}
+
+static def getVersionCodeTimestamp() {
+    def currentDate = new Date()
+    def formattedDate = currentDate.format("yyMMddHHmm")
+    def code = formattedDate.toInteger()
+    return code
+}
+
+dependencies {
+    implementation project(':shared')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //Kotlin
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.core:core-ktx:$ktx_version"
+
+    //UI
+    implementation "androidx.appcompat:appcompat:$androidx_version"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
+    implementation "com.google.android.material:material:$material_component_version"
+
+    //Architecture Components
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_viewmodel_version"
+    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+
+    //Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
+
+    //Room
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    implementation "android.arch.paging:runtime:$paging_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    androidTestImplementation "androidx.arch.core:core-testing:$arch_testing_version"
+
+    //Dagger
+    implementation "com.google.dagger:dagger-android:$dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+
+    //OkHttp
+    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.google.code.gson:gson:$gson_version"
+
+    // Instrumentation tests
+    androidTestImplementation "androidx.test.espresso:espresso-core:$testespresso_version"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$testespresso_version"
+    androidTestImplementation "androidx.test.ext:junit:$testext_version"
+    androidTestImplementation "androidx.test:runner:$testrunner_version"
+    androidTestImplementation "androidx.test:rules:$testrules_version"
+
+    //Tests
+    testImplementation "junit:junit:$junit_version"
+}

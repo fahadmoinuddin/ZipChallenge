@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.zip.challenge.home.settings.SettingsViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/favouritesMainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/Widget.Custom.Toolbar"
+            android:layout_width="0dp"
+            android:layout_height="?actionBarSize"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/settingsDarkModeSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="@{viewModel.isDarkMode}"
+            android:onCheckedChanged="@{(switch, checked) -> viewModel.onThemeChanged(checked)}"
+            android:text="@string/dark_mode"
+            android:layout_marginTop="@dimen/default_top_margin"
+            android:layout_marginStart="@dimen/large_start_margin"
+            android:layout_marginEnd="@dimen/large_start_margin"
+            style="@style/TextAppearance.Custom.H3.Bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+        <TextView
+            android:id="@+id/settingsVersionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_bottom_margin"
+            android:textColor="@color/grey"
+            android:text="@{viewModel.version}"
+            style="@style/TextAppearance.Custom.Default.Bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/settingsCreditsTextView" />
+
+        <TextView
+            android:id="@+id/settingsCreditsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/grey"
+            android:textAllCaps="true"
+            android:text="@string/credits"
+            android:layout_marginBottom="@dimen/large_bottom_margin"
+            style="@style/TextAppearance.Custom.Default"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

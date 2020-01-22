@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="navigation_stocks_list" type="id" />
+    <item name="navigation_favourites" type="id" />
+    <item name="navigation_settings" type="id" />
+</resources>

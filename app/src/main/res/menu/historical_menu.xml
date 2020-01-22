@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/show_3_months"
+        android:title="@string/recent_3_months"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/show_6_months"
+        android:title="@string/recent_6_months"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/show_1_year"
+        android:title="@string/recent_1_year"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/show_3_years"
+        android:title="@string/recent_3_years"
+        app:showAsAction="never"/>
+</menu>
